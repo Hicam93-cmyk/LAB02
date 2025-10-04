@@ -9,8 +9,8 @@
 Hệ thống cho phép khách hàng đặt phòng, thanh toán online và lễ tân quản lý check-in/out.
 
 ## 📊 UML
-![Use Case](assets/Use Case Diagram.png)
-![Sequence Online Booking](assets/Sequence Diagram.png)
+![Use Case](assets/Use%20Case%20Diagram.png)
+![Sequence Diagram](assets/Sequence%20Diagram.png)
 ![ERD](assets/ERD.png)
 
 ## 📋 Link Jira Board
