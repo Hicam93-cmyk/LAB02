@@ -1,0 +1,87 @@
+link mô tả google.doc:https://docs.google.com/document/d/1FNC4IQrqQp_Pc3Gnzo50gCH1XwrEU57nJkmY-LHSGrM/edit?usp=sharing
+
+# 🏨 Hotel Booking System – Lab 02
+
+## 🎯 Mục tiêu Dự án
+Dự án **Hotel Booking System** nhằm mục đích:
+
+- Giúp sinh viên học cách **phân tích yêu cầu và thiết kế hệ thống quản lý đặt phòng khách sạn**.  
+- Áp dụng **UML (Use Case, Sequence Diagram)** để mô tả chức năng và luồng nghiệp vụ.  
+- Thiết kế **cơ sở dữ liệu (ERD)** với các quan hệ rõ ràng giữa các thực thể.  
+- Triển khai **quy trình Agile-Scrum trên Jira**, đồng bộ với GitHub để quản lý tiến độ và mã nguồn.
+
+---
+
+## 🧩 1. Thiết kế Mini Project
+
+### 🗃️ 1.1 Các bảng dữ liệu chính (Entities)
+
+| **Entity** | **Thuộc tính** | **Mối quan hệ** |
+|-------------|----------------|-----------------|
+| **Guest** | GuestID, Name, Phone, Email, Address | 1 Guest – N Reservation |
+| **RoomType** | TypeID, Name, Price, Capacity, Description | 1 RoomType – N Room |
+| **Room** | RoomID, TypeID, Status, Floor | 1 Room – N Reservation |
+| **Reservation** | ResvID, GuestID, RoomID, StaffID, CheckInDate, CheckOutDate, Status | 1 Reservation – N Payment |
+| **Payment** | PaymentID, ResvID, Amount, Method, Status, Date | N Payment – 1 Reservation |
+| **Staff** | StaffID, Name, Role, Username, PasswordHash | 1 Staff – N Reservation |
+
+**Mối quan hệ tổng quan:**
+- Guest → 1–N Reservation  
+- Reservation → 1–N Payment  
+- RoomType → 1–N Room  
+- Room → 1–N Reservation  
+- Staff → 1–N Reservation (Lễ tân quản lý)
+
+---
+
+### 🎭 1.2 Use Case UML
+
+#### **Actors (Tác nhân):**
+- Guest (Khách hàng)  
+- Receptionist (Lễ tân)  
+- Manager (Quản lý)  
+- Payment Gateway  
+- Housekeeping (Buồng phòng)
+
+#### **Use Case chính:**
+- Tìm phòng & Xem chi tiết phòng  
+- Đặt phòng online (Booking)  
+- Thanh toán online  
+- Check-in / Check-out  
+- Quản lý phòng & giá (Manager)  
+- Quản lý đặt phòng (Receptionist)  
+- Công việc buồng phòng (Housekeeping)  
+- Báo cáo doanh thu (Manager)
+
+> *(Biểu đồ Use Case vẽ bằng PlantUML hoặc draw.io và upload lên GitHub)*  
+> 👉 [Xem Use Case Diagram](Lab02/Use%20Case%20Diagram.png)
+
+---
+
+### 🔁 1.3 Sequence Diagram
+
+#### a) **Luồng Đặt phòng online:**
+1. Guest chọn phòng → Hệ thống giữ phòng (hold)  
+2. Guest nhập thông tin → Thực hiện thanh toán  
+3. Cổng thanh toán trả kết quả → Xác nhận & gửi email  
+
+#### b) **Luồng Check-in / Check-out (Lễ tân):**
+1. Receptionist tra cứu mã đặt phòng  
+2. Check-in: gán phòng thực tế, cập nhật trạng thái  
+3. Check-out: tổng hợp chi phí, thu tiền, cập nhật buồng phòng  
+
+> *(Vẽ Sequence Diagram bằng PlantUML hoặc draw.io)*  
+> 👉 [Xem Sequence Diagram](Lab03/Sequence%20Diagram.png)
+
+---
+
+### 🧮 1.4 Thiết kế cơ sở dữ liệu (ERD)
+
+#### **Bảng và thuộc tính:**
+```text
+Guest(GuestID, Name, Phone, Email, Address)
+RoomType(TypeID, Name, Price, Capacity, Description)
+Room(RoomID, TypeID, Status, Floor)
+Reservation(ResvID, GuestID, RoomID, StaffID, CheckInDate, CheckOutDate, Status)
+Payment(PaymentID, ResvID, Amount, Method, Status, Date)
+Staff(StaffID, Name, Role, Username, PasswordHash)
